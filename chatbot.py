@@ -14,7 +14,7 @@ client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
 # Set up session state
 if "openai_model" not in st.session_state:
-    st.session_state["openai_model"] = "gpt-3.5-turbo"
+    st.session_state["openai_model"] = "gpt-4o-mini"
 
 # Set up chat messages
 if "messages" not in st.session_state:
