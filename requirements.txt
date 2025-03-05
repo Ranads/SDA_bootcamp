@@ -1,0 +1,8 @@
+openAI
+streamlit
+python-dotenv
+FastApi
+uvicorn 
+pydantic
+requests
+psycopg2-binary

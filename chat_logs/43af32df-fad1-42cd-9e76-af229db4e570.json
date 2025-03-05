@@ -1,0 +1,18 @@
+[
+    {
+        "role": "user",
+        "content": "tell me about git "
+    },
+    {
+        "role": "assistant",
+        "content": "{\"detail\":\"Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}\"}"
+    },
+    {
+        "role": "user",
+        "content": "hello"
+    },
+    {
+        "role": "assistant",
+        "content": "Hello! Git is a distributed version control system used for tracking changes in source code during software development. It allows multiple developers to work on the same project simultaneously and keeps a record of changes made by each individual. Git also enables teams to collaborate efficiently, manage different versions of a project, and track changes over time. It is widely used in the software development industry and has become an essential tool for developers. Let me know if you have any specific questions about git that I can help with."
+    }
+]
