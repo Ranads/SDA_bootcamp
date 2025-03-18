@@ -1,44 +1,18 @@
 # SDA-bootcamp-project
 
-Stage 4 - **RAG** Chatbot with Chat history
+Project Stage 5: Moving to Azure VM Manually
 
-A RAG chatbot using Streamlit and FastAPI. At this stage, we will add the RAG function to the bot.
-Other than creating normal chat, user can upload `pdf` file to the chatbot and ask questions specific to this document 
+![alt text](week3-stage5.png)
 
-In this stage, we will create a **new** table called `advanced_chats` in the database using the following schema:
-```
-CREATE TABLE IF NOT EXISTS advanced_chats (
-    id TEXT PRIMARY KEY,
-    name TEXT NOT NULL,
-    file_path TEXT NOT null,
-    last_update TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    pdf_path TEXT,
-    pdf_name TEXT,
-    pdf_uuid TEXT
-)
-```
-or if you want, you can just add the extra columns in the `chats` database created in stage 3.
+At this stage, we will move our application to an Azure VM. We’ll create a new VM and deploy our databases, frontend, and backend services on it. Additionally, we will manually set up the following components: an Azure network security group, an Azure Virtual Network, a public IP address, a subnet, a disk, and a network interface. Note that we will not use Infrastructure as Code (IaC) at this stage; everything will be set up manually.
 
-Please store your `OPENAI_API_KEY` and **Database Credentials** in `.env` file.
+VM Specifications:
 
-All the requirements are in the `requirements.txt`
+Operating System: ubuntu-24_04-lts
+Instance Type: Standard_D2ads_v6 or similar
+Disk Size: 30GB
+Furthermore, systemd service files should be created for the databases, frontend, and backend services. These services should be enabled and started.
 
-To use RAG, we need to start the chromaDB first, using the following command to start the Chroma server:
-```
-chroma run --path /db_path
-```
-change `/db_path` to the path you want to store the data, for example: `chromadb`.
+In the end, you should be able to access the application via the public IP address of the VM
 
-Then, start the backend app using:
 
-```
-uvicorn backend:app --reload --port 5000
-```
-
-> Compared to the last stage, we added a `port` parameter to change the port to `5000`. Since the chromadb will also use port 8000, we added this to avoid port conflict.
-
-And then use 
-```
-streamlit run chatbot.py
-```
-to run the Streamlit app.
