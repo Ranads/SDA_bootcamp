@@ -128,8 +128,8 @@ async def load_chat(db: psycopg2.extensions.connection = Depends(get_db)):
 @app.post("/save_chat/")
 async def save_chat(request: SaveChatRequest, db: psycopg2.extensions.connection = Depends(get_db)):
     try:
-        file_path = f"chat_logs/{request.chat_id}.json"
-        os.makedirs("chat_logs", exist_ok=True)
+        file_path = f"chat_log/{request.chat_id}.json"
+        os.makedirs("chat_log", exist_ok=True)
         
         # Save messages to file
         with open(file_path, "w", encoding="utf-8") as f:
@@ -296,5 +296,3 @@ async def rag_chat(request: RAGChatRequest):
 
     # Use StreamingResponse to return
     return StreamingResponse(stream_response(), media_type="text/plain")
-
-
