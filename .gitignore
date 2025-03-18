@@ -7,6 +7,9 @@
 
 #secrets
 .env
+chat_log/
+chroma_db/
+pdf_store/
 
 # User-specific files
 *.rsuser
