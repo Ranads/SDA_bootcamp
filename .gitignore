@@ -3,14 +3,12 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 
+# Secrets
 
-
-#secrets
-.env
-chat_log/
-chat_logs/
 chroma_db/
 pdf_store/
+chat_logs/
+.env
 
 # User-specific files
 *.rsuser
