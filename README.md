@@ -1,44 +1,42 @@
-# SDA-bootcamp-project
+# Chatbot Project
 
-Stage 4 - **RAG** Chatbot with Chat history
+## RAG Chatbot with Chat History
 
-A RAG chatbot using Streamlit and FastAPI. At this stage, we will add the RAG function to the bot.
-Other than creating normal chat, user can upload `pdf` file to the chatbot and ask questions specific to this document 
+### Stage Introduction
 
-In this stage, we will create a **new** table called `advanced_chats` in the database using the following schema:
+A **RAG (Retrieval-Augmented Generation) chatbot** using Streamlit and FastAPI. At this stage, we introduce the ability for users to upload PDF files in addition to regular chatting. This allows them to ask questions specifically about the content of those documents.
+
+![stage1-4](https://weclouddata.s3.us-east-1.amazonaws.com/cloud/project-stages/stage1-4.png)
+
+Under the hood, the system uses a **vector store (Chroma)** to retrieve the most relevant context from uploaded PDFs. This retrieval step enhances the chatbot’s ability to provide accurate, context-aware answers, bridging the gap between simple conversation and document-focused queries.
+
+This enhancement integrates seamlessly with our existing setup—Streamlit for the user interface, FastAPI for business logic, and PostgreSQL for data storage—while laying the foundation for further expansion.
+
+> **Note:** Some LLM-related concepts introduced in this stage may seem complex. However, our main goal is to get the project running, and fully understanding the LLM integration is **optional**. If you’re interested, feel free to explore the code and additional resources to enhance your project, but don’t worry if you don’t grasp everything right away.
+
+---
+
+### How to Get Started
+
+#### **Step 1: Set Up Environment Variables**
+Store your `OPENAI_API_KEY`, **Database Credentials** and **Storage SAS token** in a `.env` file.
+
+Your `.env` file should look like this:
+
+```env
+OPENAI_API_KEY=
+DB_NAME=
+DB_USER=
+DB_PASSWORD=
+DB_HOST=
+DB_PORT=
+AZURE_STORAGE_SAS_URL=
+AZURE_STORAGE_CONTAINER=
 ```
-CREATE TABLE IF NOT EXISTS advanced_chats (
-    id TEXT PRIMARY KEY,
-    name TEXT NOT NULL,
-    file_path TEXT NOT null,
-    last_update TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    pdf_path TEXT,
-    pdf_name TEXT,
-    pdf_uuid TEXT
-)
-```
-or if you want, you can just add the extra columns in the `chats` database created in stage 3.
 
-Please store your `OPENAI_API_KEY` and **Database Credentials** in `.env` file.
+#### **Step 2: Start Sartup Script**
 
-All the requirements are in the `requirements.txt`
-
-To use RAG, we need to start the chromaDB first, using the following command to start the Chroma server:
+```bash
+chmod +x setup.sh
+./setup.sh <PAT_token> <repo_url> <branch_name> <password>
 ```
-chroma run --path /db_path
-```
-change `/db_path` to the path you want to store the data, for example: `chromadb`.
-
-Then, start the backend app using:
-
-```
-uvicorn backend:app --reload --port 5000
-```
-
-> Compared to the last stage, we added a `port` parameter to change the port to `5000`. Since the chromadb will also use port 8000, we added this to avoid port conflict.
-
-And then use 
-```
-streamlit run chatbot.py
-```
-to run the Streamlit app.
